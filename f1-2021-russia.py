@@ -47,7 +47,7 @@ for driver in drivers:
         telemetry = telemetry.append(driver_telemetry)
 
 # Only keep required columns
-telemetry = telemetry[['Lap', 'Distance', 'Compound', 'Speed', 'X','Y']]
+telemetry = telemetry[['Lap', 'Distance', 'Compound', 'Speed', 'X', 'Y']]
 
 # Everything that's not intermediate will be "slick"
 telemetry['Compound'].loc[telemetry['Compound'] != 'INTERMEDIATE'] = 'SLICK'
@@ -95,8 +95,8 @@ telemetry.loc[telemetry['Fastest_compound'] == "INTERMEDIATE", 'Fastest_compound
 telemetry.loc[telemetry['Fastest_compound'] == "SLICK", 'Fastest_compound_int'] = 2
 
 
-def generate_minisector_plot(lap, save=False, details=True):
-    single_lap = telemetry.loc[telemetry['Lap'] == lap]
+def generate_minisector_plot(lap_loc, save=False, details=True):
+    single_lap = telemetry.loc[telemetry['Lap'] == lap_loc]
 
     x = np.array(single_lap['X'].values)
     y = np.array(single_lap['Y'].values)
@@ -114,7 +114,7 @@ def generate_minisector_plot(lap, save=False, details=True):
     
     if details:
         title = plt.suptitle(
-            f"2021 Russian GP \n Lap {lap} - Slicks vs. Inters"
+            f"2021 Russian GP \n Lap {lap_loc} - Slicks vs. Inters"
         )
         
     plt.gca().add_collection(lc_comp)
@@ -127,7 +127,7 @@ def generate_minisector_plot(lap, save=False, details=True):
         cbar.set_ticklabels(['Inters', 'Slicks'])
     
     if save:
-        plt.savefig(f"img/minisectors_lap_{lap}.png", dpi=300)
+        plt.savefig(f"img/minisectors_lap_{lap_loc}.png", dpi=300)
 
     plt.show()
     
