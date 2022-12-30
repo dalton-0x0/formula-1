@@ -11,7 +11,7 @@ import pandas as pd
 plotting.setup_mpl()
 
 # Enable the cache
-ff1.Cache.enable_cache('./.f1-cache') 
+ff1.Cache.enable_cache('./.f1-cache')
 
 # Get rid of some pandas warnings that are not relevant for us at the moment
 pd.options.mode.chained_assignment = None
@@ -36,14 +36,14 @@ telemetry = pd.DataFrame()
 # Telemetry can only be retrieved driver-by-driver
 for driver in drivers:
     driver_laps = laps.pick_driver(driver)
-    
+
     # Since we want to compare distances, we need to collect telemetry lap-by-lap to reset the distance
     for lap in driver_laps.iterlaps():
         driver_telemetry = lap[1].get_telemetry().add_distance()
         driver_telemetry['Driver'] = driver
         driver_telemetry['Lap'] = lap[1]['RaceLapNumber']
         driver_telemetry['Compound'] = lap[1]['Compound']
-    
+
         telemetry = telemetry.append(driver_telemetry)
 
 # Only keep required columns
@@ -59,7 +59,7 @@ num_minisectors = 25
 # What is the total distance of a lap?
 total_distance = max(telemetry['Distance'])
 
-# Generate equally sized mini-sectors 
+# Generate equally sized mini-sectors
 minisector_length = total_distance / num_minisectors
 
 minisectors = [0]
@@ -69,10 +69,10 @@ for i in range(0, (num_minisectors - 1)):
 
 # Assign minisector to every row in the telemetry data
 telemetry['Minisector'] = telemetry['Distance'].apply(
-  lambda z: (
-    minisectors.index(
-      min(minisectors, key=lambda x: abs(x-z)))+1
-  )
+    lambda z: (
+        minisectors.index(
+            min(minisectors, key=lambda x: abs(x-z)))+1
+    )
 )
 
 # Calculate fastest tyre per mini sector
@@ -111,21 +111,21 @@ def generate_minisector_plot(lap_loc, save=False, details=True):
     lc_comp.set_linewidth(2)
 
     plt.rcParams['figure.figsize'] = [12, 5]
-    
+
     if details:
         title = plt.suptitle(
             f"2021 Russian GP \n Lap {lap_loc} - Slicks vs. Inters"
         )
-        
+
     plt.gca().add_collection(lc_comp)
     plt.axis('equal')
     plt.tick_params(labelleft=False, left=False, labelbottom=False, bottom=False)
-    
+
     if details:
         cbar = plt.colorbar(mappable=lc_comp, boundaries=np.arange(1, 4))
         cbar.set_ticks(np.arange(1.5, 9.5))
         cbar.set_ticklabels(['Inters', 'Slicks'])
-    
+
     if save:
         plt.savefig(f"img/minisectors_lap_{lap_loc}.png", dpi=300)
 
