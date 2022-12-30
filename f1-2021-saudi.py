@@ -36,8 +36,8 @@ plt.rcParams['figure.figsize'] = [15, 6]
 fig, ax = plt.subplots()
 fig.suptitle("Saudi: HAM vs VER laps 18-50")
 
-ax.plot(laps_ham['RaceLapNumber'], laps_ham['LapTime'], label='HAM', color='cyan', linewidth=5)
-ax.plot(laps_ver['RaceLapNumber'], laps_ver['LapTime'], label='VER', color='pink', linewidth = 3)
+ax.plot(laps_ham['RaceLapNumber'], laps_ham['LapTime'], label='HAM', color='cyan', linewidth=2)
+ax.plot(laps_ver['RaceLapNumber'], laps_ver['LapTime'], label='VER', color='pink', linewidth=2)
 ax.set(ylabel='Lap Time', xlabel='Lap Number')
 ax.legend(loc="upper center")
 
@@ -45,8 +45,8 @@ plt.xlim([18, 50])
 plt.show()
 
 # Get lap data
-lap_telemetry_ham = laps_ham.loc[laps_ham['RaceLapNumber']==36].get_car_data().add_distance()
-lap_telemetry_ver = laps_ver.loc[laps_ver['RaceLapNumber']==36].get_car_data().add_distance()
+lap_telemetry_ham = laps_ham.loc[laps_ham['RaceLapNumber'] == 36].get_car_data().add_distance()
+lap_telemetry_ver = laps_ver.loc[laps_ver['RaceLapNumber'] == 36].get_car_data().add_distance()
 
 # Make plot a bit bigger
 plt.rcParams['figure.figsize'] = [15, 15]

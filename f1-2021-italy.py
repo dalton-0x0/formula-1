@@ -80,13 +80,13 @@ plt.show()
 
 
 # Get lap data
-lap_telemetry_ric = laps_ric.loc[laps_ric['RaceLapNumber']==4].get_car_data().add_distance()
-lap_telemetry_ver = laps_ver.loc[laps_ver['RaceLapNumber']==4].get_car_data().add_distance()
+lap_telemetry_ric = laps_ric.loc[laps_ric['RaceLapNumber'] == 4].get_car_data().add_distance()
+lap_telemetry_ver = laps_ver.loc[laps_ver['RaceLapNumber'] == 4].get_car_data().add_distance()
 
-distance_lap3 = full_distance_ver_ric.loc[full_distance_ver_ric['Lap']==3]
-distance_lap4 = full_distance_ver_ric.loc[full_distance_ver_ric['Lap']==4]
-distance_lap5 = full_distance_ver_ric.loc[full_distance_ver_ric['Lap']==5]
-distance_lap6 = full_distance_ver_ric.loc[full_distance_ver_ric['Lap']==6]
+distance_lap3 = full_distance_ver_ric.loc[full_distance_ver_ric['Lap'] == 3]
+distance_lap4 = full_distance_ver_ric.loc[full_distance_ver_ric['Lap'] == 4]
+distance_lap5 = full_distance_ver_ric.loc[full_distance_ver_ric['Lap'] == 5]
+distance_lap6 = full_distance_ver_ric.loc[full_distance_ver_ric['Lap'] == 6]
 
 # Make plot a bit bigger
 plt.rcParams['figure.figsize'] = [15, 15]

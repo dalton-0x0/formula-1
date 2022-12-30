@@ -68,7 +68,7 @@ for i in range(0, (num_minisectors - 1)):
     minisectors.append(minisector_length * (i + 1))
 
 # Assign minisector to every row in the telemetry data
-telemetry['Minisector'] =  telemetry['Distance'].apply(
+telemetry['Minisector'] = telemetry['Distance'].apply(
   lambda z: (
     minisectors.index(
       min(minisectors, key=lambda x: abs(x-z)))+1
@@ -93,6 +93,7 @@ telemetry = telemetry.sort_values(by=['Distance'])
 # Assign integer value to the compound because that's what matplotlib wants
 telemetry.loc[telemetry['Fastest_compound'] == "INTERMEDIATE", 'Fastest_compound_int'] = 1
 telemetry.loc[telemetry['Fastest_compound'] == "SLICK", 'Fastest_compound_int'] = 2
+
 
 def generate_minisector_plot(lap, save=False, details=True):
     single_lap = telemetry.loc[telemetry['Lap'] == lap]
@@ -129,3 +130,4 @@ def generate_minisector_plot(lap, save=False, details=True):
         plt.savefig(f"img/minisectors_lap_{lap}.png", dpi=300)
 
     plt.show()
+    
