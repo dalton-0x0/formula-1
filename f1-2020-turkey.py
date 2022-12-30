@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 
 plotting.setup_mpl()
 
-ff1.Cache.enable_cache('./f1-cache')  # optional but recommended
+ff1.Cache.enable_cache('./.f1-cache')  # optional but recommended
 
 race = ff1.get_session(2020, 'Turkey', 'R')
 laps = race.load_laps()
