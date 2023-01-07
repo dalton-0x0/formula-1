@@ -2,3 +2,4 @@
 .fleet
 __pycache__/
 .venv
+.idea
